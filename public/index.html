@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111318">
+  <title>TASKORA — Plan smarter. Build better.</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+  <script src="/nav.js" defer></script>
+</head>
+<body>
+  <main class="auth-shell" id="authView">
+    <section class="brand-panel">
+      <div class="brand"><span class="brand-mark">T</span> TASKORA</div>
+      <p class="eyebrow">PLAN SMARTER. BUILD BETTER.</p>
+      <h1>Semua progres,<br><span>dalam satu ruang.</span></h1>
+      <p class="muted">Kelola tugasmu dengan lebih fokus. Rencanakan, kerjakan, dan pantau progres tanpa kehilangan arah.</p>
+      <div class="brand-foot">WORK WITH CLARITY · BUILD WITH PURPOSE</div>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <div class="brand mobile-brand"><span class="brand-mark">T</span> TASKORA</div>
+        <div class="tab-row">
+          <button class="tab active" id="showLogin" type="button">Masuk</button>
+          <button class="tab" id="showRegister" type="button">Buat akun</button>
+        </div>
+
+        <form id="loginForm">
+          <h2>Selamat datang kembali</h2>
+          <p class="muted">Masuk untuk melanjutkan pekerjaanmu.</p>
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" required maxlength="191" placeholder="nama@email.com">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" required maxlength="72" placeholder="Masukkan password">
+          <button class="btn primary full" type="submit">Masuk ke TASKORA <span>→</span></button>
+        </form>
+
+        <form id="registerForm" hidden>
+          <h2>Buat ruang produktifmu</h2>
+          <p class="muted">Mulai dengan membuat akun TASKORA.</p>
+          <label for="registerName">Nama</label>
+          <input id="registerName" name="name" autocomplete="name" required minlength="2" maxlength="100" placeholder="Nama kamu">
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" name="email" type="email" autocomplete="email" required maxlength="191" placeholder="nama@email.com">
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="72" placeholder="Minimal 10 karakter">
+          <button class="btn primary full" type="submit">Buat akun <span>→</span></button>
+        </form>
+
+        <p id="authMessage" class="message" role="status" aria-live="polite"></p>
+        <p class="tiny muted">Versi awal TASKORA · Simpan password dengan aman.</p>
+      </div>
+    </section>
+  </main>
+
+  <main id="dashboardView" class="app-shell" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TASKORA home"><span class="brand-mark">T</span> TASKORA</a>
+      <p class="side-label">Ruang Kerja</p>
+
+      <nav class="side-nav" aria-label="Menu utama">
+        <button class="nav-item active" type="button" data-view="overview" data-title="Ringkasan" aria-current="page">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Ringkasan
+        </button>
+        <button class="nav-item" type="button" id="focusTasks" data-view="projects" data-title="Proyek">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Proyek
+        </button>
+        <button class="nav-item" type="button" data-view="calendar" data-title="Kalender">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+          Kalender
+        </button>
+        <button class="nav-item" type="button" data-view="analytics" data-title="Analitik &amp; Laporan">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+          Analitik &amp; Laporan
+        </button>
+        <button class="nav-item" type="button" data-view="notifications" data-title="Notifikasi">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
+          Notifikasi
+        </button>
+        <button class="nav-item" type="button" data-view="team" data-title="Tim &amp; Peran">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></svg>
+          Tim &amp; Peran
+        </button>
+        <button class="nav-item" type="button" data-view="settings" data-title="Pengaturan">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          Pengaturan
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="user-mini"><div class="avatar" id="avatar">T</div><div><strong id="sideName">Pengguna</strong><small>Personal workspace</small></div></div>
+        <button id="logoutBtn" class="nav-item logout" type="button">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          Keluar
+        </button>
+      </div>
+    </aside>
+
+    <section class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">PERSONAL WORKSPACE</p><h1 id="pageTitle">Ringkasan</h1></div>
+        <div class="top-user"><span class="status-dot"></span><span id="topName">Pengguna</span></div>
+      </header>
+
+      <div id="overviewView">
+        <section class="welcome-row">
+          <div><p class="muted" id="todayLabel">YOUR WORKSPACE</p><h2>Fokus pada hal yang <span>penting.</span></h2><p class="muted">Satu langkah kecil, satu progres nyata.</p></div>
+          <button class="btn primary" id="jumpAdd" type="button">+ Tambah tugas</button>
+        </section>
+
+        <section class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total tugas</span><span class="stat-icon">▦</span></div><strong id="totalCount">0</strong><small class="muted">Semua tugasmu</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Berjalan</span><span class="stat-icon orange">◷</span></div><strong id="progressCount">0</strong><small class="muted">Sedang dikerjakan</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Selesai</span><span class="stat-icon green">✓</span></div><strong id="doneCount">0</strong><small class="muted">Tugas terselesaikan</small></article>
+          <article class="stat-card highlight"><div class="stat-top"><span>Completion rate</span><span class="stat-icon">%</span></div><strong id="completionRate">0%</strong><div class="mini-track"><span id="completionBar"></span></div></article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel task-panel" id="tasksSection">
+            <div class="panel-head"><div><p class="eyebrow">YOUR PRIORITIES</p><h2>Daftar tugas</h2></div><span class="pill" id="taskPill">0 tugas</span></div>
+
+            <form id="taskForm" class="task-form">
+              <input id="taskTitle" name="title" required maxlength="200" placeholder="Contoh: Selesaikan laporan RPL">
+              <select id="taskProject" class="field" aria-label="Proyek untuk tugas baru"><option value="">Tanpa proyek</option></select>
+              <select id="taskPriority" class="field" aria-label="Prioritas">
+                <option value="low">Prioritas rendah</option>
+                <option value="medium" selected>Prioritas sedang</option>
+                <option value="high">Prioritas tinggi</option>
+              </select>
+              <input id="taskDue" type="date" aria-label="Tenggat">
+              <button class="btn primary" type="submit">Tambah</button>
+            </form>
+            <p id="taskMessage" class="message" role="status" aria-live="polite"></p>
+
+            <div class="filter-bar">
+              <input id="searchInput" type="search" maxlength="100" placeholder="Cari tugas..." aria-label="Cari tugas">
+              <select id="filterProject" class="field" aria-label="Filter proyek"><option value="">Semua proyek</option><option value="none">Tanpa proyek</option></select>
+              <select id="filterStatus" class="field" aria-label="Filter status">
+                <option value="">Semua status</option>
+                <option value="todo">Belum mulai</option>
+                <option value="in_progress">Dikerjakan</option>
+                <option value="in_review">Review</option>
+                <option value="done">Selesai</option>
+              </select>
+            </div>
+
+            <div class="view-toggle" aria-label="Tampilan tugas">
+              <button id="viewList" class="view-btn active" type="button">☰ Daftar</button>
+              <button id="viewBoard" class="view-btn" type="button">▥ Papan</button>
+            </div>
+            <div id="taskList" class="task-list"></div>
+            <div id="boardView" class="board" hidden></div>
+          </article>
+
+          <div class="side-stack">
+            <aside class="panel" id="projectsPanel">
+              <div class="panel-head"><div><p class="eyebrow">PROJECTS</p><h2>Proyek</h2></div><span class="pill" id="projectPill">0 proyek</span></div>
+              <form id="projectForm" class="task-form">
+                <input id="projectName" required maxlength="100" placeholder="Nama proyek baru">
+                <button class="btn primary" type="submit">+</button>
+              </form>
+              <p id="projectMessage" class="message" role="status" aria-live="polite"></p>
+              <div id="projectList" class="project-list"></div>
+            </aside>
+
+            <aside class="panel insight-panel">
+              <p class="eyebrow">WORK SMARTER</p><h2>Jaga momentum.</h2>
+              <p class="muted">Mulai dari tugas paling penting, pecah pekerjaan besar menjadi langkah kecil, lalu tandai progresmu.</p>
+              <div class="insight-line"></div>
+              <div class="insight-bottom"><span class="insight-mark">✳</span><span><strong>Small steps matter.</strong><small class="muted">Konsistensi membangun hasil.</small></span></div>
+            </aside>
+          </div>
+        </section>
+      </div>
+
+      <section id="calendarView" hidden>
+        <section class="cal-layout">
+          <article class="panel cal-panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">TENGGAT TUGAS</p><h2 id="calTitle">Kalender</h2></div>
+              <div class="cal-controls">
+                <span class="pill" id="calPill">0 tenggat</span>
+                <button class="view-btn cal-nav" id="calPrev" type="button" aria-label="Bulan sebelumnya">‹</button>
+                <button class="view-btn cal-today" id="calToday" type="button">Hari ini</button>
+                <button class="view-btn cal-nav" id="calNext" type="button" aria-label="Bulan berikutnya">›</button>
+              </div>
+            </div>
+            <p id="calMessage" class="message" role="status" aria-live="polite"></p>
+            <div class="cal-weekdays" aria-hidden="true">
+              <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+            </div>
+            <div id="calGrid" class="cal-grid" role="grid" aria-label="Kalender tenggat tugas"></div>
+            <div class="cal-legend">
+              <span><i class="dot high"></i>Prioritas tinggi</span>
+              <span><i class="dot medium"></i>Sedang</span>
+              <span><i class="dot low"></i>Rendah</span>
+              <span><i class="dot late"></i>Terlambat</span>
+            </div>
+          </article>
+
+          <aside class="panel cal-day-panel">
+            <div class="panel-head">
+              <div><p class="eyebrow" id="calDayEyebrow">TANGGAL DIPILIH</p><h2 id="calDayTitle">-</h2></div>
+              <span class="pill" id="calDayPill">0 tugas</span>
+            </div>
+            <form id="calAddForm" class="task-form cal-add">
+              <input id="calAddTitle" maxlength="200" required placeholder="Tambah tugas di tanggal ini">
+              <button class="btn primary" type="submit">+</button>
+            </form>
+            <div id="calDayList" class="task-list"></div>
+          </aside>
+        </section>
+      </section>
+
+      <section id="soonView" class="soon-panel" hidden>
+        <div class="soon-card">
+          <p class="eyebrow">SEGERA HADIR</p>
+          <h2 id="soonTitle">Fitur</h2>
+          <p class="muted" id="soonText"></p>
+          <button class="btn primary" id="backOverview" type="button">← Kembali ke Ringkasan</button>
+        </div>
+      </section>
+
+      <footer class="footer">TASKORA <span>·</span> Plan smarter. Build better.</footer>
+    </section>
+  </main>
+</body>
+</html>
